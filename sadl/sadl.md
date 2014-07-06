@@ -71,6 +71,20 @@ Now I realize this change would break existing code:
 There are several ways to avoid it.
 
 1. Use SADL only if no candidate within the current namespace is found.
-2. Introduce a new switch, e.g. 'switch enum' or 'enum switch', where SADL is used systematically. Such a name would imply that the switch expression must be of enum type (in addition, case labels could be forced to only involve enumerators of this enumeration, in order to increase type safety and add more value to the construct). If another name is found that does not involve 'enum', this constraint could be removed, but I feel that using this new switch explicitly asks for SADL, and therefore it would not make much sense to use such it on a plain integer.
+2. Introduce a new switch, e.g. 'switch enum' or 'enum switch', where SADL is used systematically. Such a name would imply that the switch expression must be of enum type (in addition, case labels could be forced to only involve enumerators of this enumeration, in order to increase type safety and add more value to the construct). If another name is found that does not involve 'enum', this constraint could be removed, but I feel that using this new switch explicitly asks for SADL, and therefore it would not make much sense to use it on a plain integer.
+```c++
+    switch (p.reason) {
+        case packet::connection_failed::reason_t::unexpected_packet : // ok
+        case too_many_clients :                                       // not ok
+        case 2 :                                                      // ok
+    }
+    switch enum (p.reason) {
+        case packet::connection_failed::reason_t::unexpected_packet : // ok
+        case too_many_clients :                                       // ok
+        case 2 :                                                      // not ok
+    }
+    switch (5) {}                                                     // ok
+    switch enum (5) {}                                                // not ok
+```
 
 Both solutions allow C++ code that would be otherwise invalid, and thus would not change the behavior of current code (except when SFINAE is involved in case of solution 1). I like the first solution more since it is more generic as it is not tied to enumerations in particular, and it is simple to learn as it does not involve any new construct.
