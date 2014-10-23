@@ -59,6 +59,7 @@ namespace packet {
 // Without this proposal
 void treat_packet(packet::connection_failed p) {
     switch (p.reason) {
+        // As suggested by D. Krauss in the above link
         using case_t = decltype(p.reason);
         case case_t::too_many_clients :
             std::cout << "server is crowded" << std::endl; break;
@@ -73,6 +74,7 @@ void treat_packet(packet::connection_failed p) {
 // With this proposal
 void treat_packet(packet::connection_failed p) {
     switch (p.reason) {
+        // Import the enumerators from packet::connection_failed::reason_t
         using namespace decltype(p.reason);
         case too_many_clients :
             std::cout << "server is crowded" << std::endl; break;
