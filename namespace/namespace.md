@@ -40,7 +40,7 @@ int main() {
 
 Apart from conceptual consistency, why would it actually be useful?
 
-# Case 1: Simplify usage of enumerations in switch.
+## Case 1: Simplify usage of enumerations in switch.
 Note that it would also make the implementation of the following proposal almost trivial:
 https://groups.google.com/a/isocpp.org/d/topic/std-proposals/f-P2TENSAaU/discussion
 
@@ -85,7 +85,7 @@ void treat_packet(packet::connection_failed p) {
 }
 ```
 
-# Case 2: Provide better name import mechanisms for wrapper types.
+## Case 2: Provide better name import mechanisms for wrapper types.
 ```c++
 // Without this proposal
 template<typename T>
@@ -114,7 +114,7 @@ public :
 };
 ```
 
-# Case 3: Allow templatized namespaces
+## Case 3: Allow templatized namespaces
 ```c++
 namespace file_structure {
     struct v1 {
