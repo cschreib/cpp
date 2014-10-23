@@ -158,9 +158,8 @@ auto read_file(std::string filename) {
     file >> f;
 
     std::vector<Version::region> regions(f.num_region);
-
-    for (uint32_t i : std::range(f.num_region)) {
-        file >> regions[i];
+    for (auto& reg : regions) {
+        file >> reg;
     }
 
     // Could load many other things
@@ -178,9 +177,8 @@ auto read_file(std::string filename) {
     file >> f;
 
     std::vector<region> regions(f.num_region);
-
-    for (uint32_t i : std::range(f.num_region)) {
-        file >> regions[i];
+    for (auto& reg : regions) {
+        file >> reg;
     }
 
     // Could load many other things
